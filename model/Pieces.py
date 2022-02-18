@@ -1,5 +1,5 @@
 from model.Piece import Piece
-from model.Constants import SQUARE_SIZE
+from model.Constants import VALID_SQUARES, WHITE, BLACK
 
 
 class Pieces:
@@ -9,18 +9,23 @@ class Pieces:
         self._init_pieces()
 
     def _init_pieces(self):
+        if self._color == WHITE:
+            self._init_white_pieces()
+        elif self._color == BLACK:
+            self._init_black_pieces()
+
+    def _init_white_pieces(self):
         for i in range(12):
-            x = i%4
-            y = i//4
+            x, y = VALID_SQUARES[i]
 
-            X_pos = (x * SQUARE_SIZE)
-            X_pos = X_pos + SQUARE_SIZE*x if i % 2 != 0 else X_pos
-            Y_pos = (y * SQUARE_SIZE)
+            new = Piece(self._color, x, y)
+            self.pieces.append(new)
+    
+    def _init_black_pieces(self):
+        for i in range(31, 19, -1):
+            x, y = VALID_SQUARES[i]
 
-            if (y) % 2 == 0:
-                x += SQUARE_SIZE
-
-            new = Piece(self._color, X_pos, Y_pos)
+            new = Piece(self._color, x, y)
             self.pieces.append(new)
     
     def blit(self, screen):

@@ -1,7 +1,7 @@
 import pygame
 from model.Board import Board
 from model.Player import Player
-from model.Constants import BOARD_SIZE
+from model.Constants import BOARD_SIZE, WHITE, BLACK
 
 
 class App:
@@ -10,41 +10,43 @@ class App:
         self._display_surf = True
         self.size = self.weight, self.height = BOARD_SIZE, BOARD_SIZE
 
-        self.board = Board()
-        self.white_player = Player('white')
-        self.black_player = Player('black')
-    
+        self.board = Board(BOARD_SIZE)
+        self.white_player = Player(WHITE)
+        self.black_player = Player(BLACK)
+
     def on_init(self):
         pygame.init()
-        self._display_surf = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
+        self._display_surf = pygame.display.set_mode(
+            self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
         self._running = True
 
         self._display_surf.blit(self.board.image, (0, 0))
         self.white_player.pieces.blit(self._display_surf)
-    
+        self.black_player.pieces.blit(self._display_surf)
+
     def on_event(self, event):
         if event.type == pygame.QUIT:
             self._running = False
-    
+
     def on_loop(self):
         pass
 
     def on_render(self):
         pygame.display.flip()
-    
+
     def on_cleanup(self):
         pygame.quit()
-    
+
     def on_execute(self):
         if self.on_init() == False:
             self._running = False
-        
+
         while self._running:
             for event in pygame.event.get():
                 self.on_event(event)
                 self.on_loop()
                 self.on_render()
-            
+
         self.on_cleanup()
 
 

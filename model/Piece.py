@@ -11,7 +11,7 @@ class Piece:
     
     def load_image(self):
         self.image = pygame.image.load(self._image_file)
-        self.image = pygame.transform.scale(self.image, (SQUARE_SIZE, SQUARE_SIZE))
+        self.image = pygame.transform.smoothscale(self.image, (SQUARE_SIZE, SQUARE_SIZE))
     
     def blit(self, screen):
         screen.blit(self.image, (self.x, self.y))
