@@ -15,3 +15,10 @@ class Piece:
     
     def blit(self, screen):
         screen.blit(self.image, (self.x, self.y))
+    
+    def get_position(self):
+        return (self.x, self.y)
+
+    def set_position(self, position):
+        self.x = position[0]
+        self.y = position[1]
