@@ -1,13 +1,14 @@
 import pygame
 from model.Board import Board
 from model.Player import Player
+from model.Constants import BOARD_SIZE
 
 
 class App:
     def __init__(self):
         self._running = True
         self._display_surf = True
-        self.size = self.weight, self.height = 480, 480
+        self.size = self.weight, self.height = BOARD_SIZE, BOARD_SIZE
 
         self.board = Board()
         self.white_player = Player('white')

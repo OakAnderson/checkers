@@ -1,13 +1,10 @@
 import pygame
-import os
-
-BOARD_SIZE = 480
-SQUARE_SIZE = (BOARD_SIZE // 8)
+from model.Constants import BOARD_IMAGE_FILE
 
 
 class Board:
     def __init__(self):
-        self._image_file = os.path.join("resources", "images", "board.svg")
+        self._image_file = BOARD_IMAGE_FILE
         self.load_image()
     
     def load_image(self):

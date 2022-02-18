@@ -1,16 +1,11 @@
 import pygame
 import os
-from model.Board import SQUARE_SIZE
-
-PIECE_FILE = {
-    'white': os.path.join("resources", "images", "white_piece.png"),
-    'black': os.path.join("resources", "images", "black_piece.png")
-}
+from model.Constants import SQUARE_SIZE, PIECE_IMAGE_FILE
 
 
 class Piece:
     def __init__(self, color, x, y):
-        self._image_file = PIECE_FILE[color]
+        self._image_file = PIECE_IMAGE_FILE[color]
         self.x, self.y = x, y
         self.load_image()
     

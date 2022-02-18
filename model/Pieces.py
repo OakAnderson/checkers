@@ -1,5 +1,5 @@
 from model.Piece import Piece
-from model.Board import BOARD_SIZE, SQUARE_SIZE
+from model.Constants import SQUARE_SIZE
 
 
 class Pieces:
@@ -20,7 +20,6 @@ class Pieces:
             if (y) % 2 == 0:
                 x += SQUARE_SIZE
 
-            print(x, y)
             new = Piece(self._color, X_pos, Y_pos)
             self.pieces.append(new)
     
