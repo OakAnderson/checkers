@@ -6,6 +6,7 @@ from model.Constants import SQUARE_SIZE, PIECE_IMAGE_FILE
 class Piece:
     def __init__(self, color, x, y):
         self._image_file = PIECE_IMAGE_FILE[color]
+        self.color = color
         self.x, self.y = x, y
         self.load_image()
     

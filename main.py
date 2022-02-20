@@ -1,11 +1,16 @@
 import pygame
+
 from model.Board import Board
 from model.Player import Player
 from model.Constants import BOARD_SIZE, WHITE, BLACK
 
+from services.BoardService import BoardService
+
 
 class App:
     def __init__(self):
+        self.boardService = BoardService()
+
         self._running = True
         self._display_surf = True
         self.size = self.weight, self.height = BOARD_SIZE, BOARD_SIZE
@@ -13,7 +18,9 @@ class App:
         self.white_player = Player(WHITE)
         self.black_player = Player(BLACK)
         self.board = Board(BOARD_SIZE, self.white_player.pieces, self.black_player.pieces)
+        self.boardService.set_board(self.board)
 
+        self.positionDown = None
         self.piece_to_move = None
 
     def on_init(self):
@@ -26,13 +33,7 @@ class App:
         if event.type == pygame.QUIT:
             self._running = False
         
-        if event.type == pygame.MOUSEBUTTONUP:
-            pos = pygame.mouse.get_pos()
-
-            if self.board.has_piece(pos):
-                self.piece_to_move = self.board.get_piece(pos)
-            elif self.piece_to_move is not None:
-                self.board.move_piece(self.piece_to_move, pos)
+        self.boardService.handle_event(event)
 
     def on_loop(self):
         pass
